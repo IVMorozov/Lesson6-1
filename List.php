@@ -17,23 +17,15 @@
         <p class="help-block">Выберете тест</p>
     </section>
     <?php
-
-        $dir = (__DIR__  .  DIRECTORY_SEPARATOR  . Tests);
-        $files = scandir($dir);
-    
-     /*echo '<pre>';
-      print_r($files);
-      echo PHP_EOL;*/
-
+      error_reporting(0);
+      $dir = (__DIR__  .  DIRECTORY_SEPARATOR  . Tests);
+      $files = scandir($dir);
       foreach ($files as $index => $filetype) {
         If  (strrpos($filetype, 'json')) {$Testlist[]= $filetype;}
-        }    
-      /*echo '<pre>';
-      print_r($Testlist);
-      echo PHP_EOL;*/
+      }    
     ?>
 
-      <section class="bgrnd-test">
+    <section class="bgrnd-test">
       <div class="testarea">
         <form class="list" action="test.php" method="GET" >
           <?php            
@@ -43,6 +35,6 @@
           <p><input class="testchoice" type="submit" value="Выбрать тест"></p>
         </form>
       </div>
-  </section>
+    </section>
   </body>
 </html>
