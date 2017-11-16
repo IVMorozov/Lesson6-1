@@ -1,0 +1,18 @@
+  {"Test_Group_id": 1,
+  "0": {"question": "Решите задачу 2 + 2 = ?", 
+            "correct_answer": 4,
+            "answers":{"a":4,"b":5,"c":6,"d":3}
+          },
+  "1": {"question": "Решите задачу 2 + 3 = ?", 
+            "correct_answer": 5,
+            "answers":{"a":4,"b":5,"c":6,"d":3}
+          },
+  "2": {"question": "Решите задачу 2 + 4 = ?", 
+            "correct_answer": 6,
+            "answers":{"a":4,"b":5,"c":6,"d":3}
+          },
+  "3": {"question": "Решите задачу 2 + 1 = ?", 
+            "correct_answer": 3,
+            "answers":{"a":4,"b":5,"c":6,"d":3}
+          }
+}          
