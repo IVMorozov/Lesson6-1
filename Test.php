@@ -40,7 +40,7 @@
                 $Correct_answer[$Test_number]=$test_json[$Test_number]['correct_answer'];
                 echo'<h1 class="test-header">'. $test_json[$Test_number]['question'].'</h1>';
                   foreach ($test_json[$Test_number]['answers'] as $index => $item) {
-                    echo '<input class="item" type="radio" name='.$Ansers_checked[$Test_number].' value='.$item.$break.$test_json[$Test_number]['correct_answer'].'>'.$item;}
+                    echo '<input class="item" type="radio" name="Answers['.$Test_number.']" value='.$item.$break.$test_json[$Test_number]['correct_answer'].'>'.$item;}
                 echo'</div>' ;   
               }    
             ?>
@@ -59,9 +59,8 @@
         $Result_count;
         $Final_result;
 
-        foreach ($Ansers_checked as $answer => $bool) {
-          $Test_Check = explode("=", $answer);
-          $Chek=explode('vs', $Test_Check[1]);
+        foreach ($Ansers_checked['Answers'] as $index => $answer) {
+          $Chek=explode('vs', $answer);
           If ($Chek[0]==$Chek[1]) {$Result[$answer]=1;} else{$Result[$answer]=0;}
           $Result_count=$Result_count+$Result[$answer];
         }
