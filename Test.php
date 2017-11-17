@@ -31,16 +31,17 @@
               $Test_number;
               $item;
               $break='vs';
-              $Correct_answer;
               $index;
               $Ansers_checked;
+              $Test_count = count($test_json)-1;
+      
               echo'<h1 >Ответьте на вопросы теста:</h1>';
               for ($Test_number = 0; $Test_number <= $Test_index; $Test_number++) {
                 echo'<div class="test-part">';
                 $Correct_answer[$Test_number]=$test_json[$Test_number]['correct_answer'];
                 echo'<h1 class="test-header">'. $test_json[$Test_number]['question'].'</h1>';
                   foreach ($test_json[$Test_number]['answers'] as $index => $item) {
-                    echo '<input class="item" type="radio" name="Answers['.$Test_number.']" value='.$item.$break.$test_json[$Test_number]['correct_answer'].'>'.$item;}
+                    echo '<input class="item" type="radio" name="Answers['.$Test_number.']" value='.$item.$break.$test_json[$Test_number]['correct_answer'].$break.$Test_count.'>'.$item;}
                 echo'</div>' ;   
               }    
             ?>
@@ -56,23 +57,35 @@
         }
         $Ansers_checked=$_GET;
         $Result;
+        $Test_count;
         $Result_count;
+        $All_Test_count;
         $Final_result;
+        $Missed_Count;
 
         foreach ($Ansers_checked['Answers'] as $index => $answer) {
           $Chek=explode('vs', $answer);
-          If ($Chek[0]==$Chek[1]) {$Result[$answer]=1;} else{$Result[$answer]=0;}
+          If ($Chek[0]==$Chek[1]) {
+             $Result[$answer]=1;
+             $All_Test_count=$Chek[2];
+          } 
+            else {
+              $Result[$answer]=0;
+              $All_Test_count=$Chek[2];
+            }
           $Result_count=$Result_count+$Result[$answer];
         }
 
         $Test_count=count($Result);
+        $Missed_Count=$All_Test_count-$Test_count;
+        IF ($Missed_Count==0) {unset($Missed_Count);} else {$Missed_Count= '<br> Проигнорировали вопросов - '.$Missed_Count;}
         if ($Result_count>0) { 
           $Final_result= 'Вы ответили правильно на '.$Result_count.' из '.$Test_count.' вопросов!';
         } 
           else { 
             $Final_result='Вы не ответили правильно ни на один вопрос!';
           }
-        echo'<p class="final">'.$Final_result.'</p>';
+        echo'<p class="final">'.$Final_result.$Missed_Count.'</p>';
     }
     ?>
     </section>
