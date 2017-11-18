@@ -21,11 +21,15 @@
       $pieces = explode("item=", $_SERVER['REQUEST_URI']);
       If (isset($pieces[1])) {
           $test_path = __DIR__  .  DIRECTORY_SEPARATOR  . Tests .  DIRECTORY_SEPARATOR  . $pieces[1];
+          if (!file_exists($test_path)) {
+            header('HTTP/1.1 404 Not Found');
+            exit;
+          }
           $tmp_path = file_get_contents($test_path);
           $test_json = json_decode($tmp_path, true);
                   ?>
           <section class="testblock">
-          <form class="list" action="test.php" method="GET">
+          <form class="list" action="test.php" method="POST">
             <?php
               $Test_index = count($test_json)-2;
               $Test_number;
@@ -51,11 +55,11 @@
       <?php
       }
       else {
-        if (count($_GET) == 0 ) {
+        if (count($_POST) == 0 ) {
           echo'<p class="final">Вы не выбрали ни один вариант, начните заново с выбора теста (вкладка "выбор тестов")</p>';
           exit;
         }
-        $Ansers_checked=$_GET;
+        $Ansers_checked=$_POST;
         $Result;
         $Test_count;
         $Result_count;
